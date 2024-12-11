@@ -1,12 +1,8 @@
 import { beforeAll, afterEach, afterAll, describe, expect, test } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import Booking from "../src/views/Booking";
 import { MemoryRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
 import Confirmation from "../src/views/Confirmation";
-import App from "../src/App";
-import { setupServer } from "msw/node";
-import { handlers } from "../mocks/handler";
+
 
 
 
