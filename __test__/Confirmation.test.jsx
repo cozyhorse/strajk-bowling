@@ -42,7 +42,6 @@ describe("Confirmation tests", () => {
     expect(screen.getByLabelText("Who")).toHaveValue("4");
     expect(screen.queryByText("Total:")).toBeDefined();
     expect(screen.queryByText("1000 sek")).toBeDefined();
-    sessionStorage.clear();
   });
 
 });
