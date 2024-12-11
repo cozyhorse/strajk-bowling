@@ -60,7 +60,7 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Build dist
+      - name: Start build
         run: npm run build
 
       - name: Setup pages
