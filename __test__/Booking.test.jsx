@@ -100,7 +100,6 @@ describe("App tests", () => {
   
       fireEvent.click(submitBtn);
       expect(screen.getByText("Antalet skor måste stämma överens med antal spelare"))
-      //screen.debug();
         
 
   })
