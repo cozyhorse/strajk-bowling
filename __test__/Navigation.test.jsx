@@ -1,9 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import Navigation from "../src/components/Navigation/Navigation";
-import Booking from "../src/views/Booking";
-import Confirmation from "../src/views/Confirmation";
 import App from "../src/App";
 
 
@@ -18,7 +14,8 @@ describe("Navigation Tests", () => {
        
        fireEvent.click(confirmation[0]);
        expect(screen.queryByText("Inga bokning gjord")).toBeDefined();
-    })
+    });
+
     test("Navigate to Booking", () => {
         render(<App />)
        
@@ -32,5 +29,5 @@ describe("Navigation Tests", () => {
        fireEvent.click(booking);
        expect(screen.queryByText("When, WHAT & Who")).toBeDefined();
        expect(screen.queryByText("Date")).toBeDefined();
-    })
+    });
 })

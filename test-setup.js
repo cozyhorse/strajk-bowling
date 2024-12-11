@@ -11,7 +11,7 @@ beforeAll(() => server.listen());
 afterEach(() => {
     cleanup()
     sessionStorage.clear();
-    //server.resetHandlers();
+    server.resetHandlers();
 
 })
 

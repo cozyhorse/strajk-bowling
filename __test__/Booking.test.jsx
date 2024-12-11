@@ -2,11 +2,9 @@ import { describe, expect, test } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Booking from "../src/views/Booking";
 import { MemoryRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
-import Confirmation from "../src/views/Confirmation";
 
 describe("App tests", () => {
-  test("Test Filling all fields", async () => {
+  test("Test Filling all fields and see if sessionStorage gets populated with the request", async () => {
     render(
       <MemoryRouter>
         <Booking />
@@ -41,22 +39,36 @@ describe("App tests", () => {
     fireEvent.change(screen.getByLabelText("Shoe size / person 1"), {
         target: { value: "29" },
       });
+
+
     expect(screen.getByLabelText("Date")).toHaveValue("2024-12-09");
     expect(screen.getByLabelText("Time")).toHaveValue("14:00");
     expect(screen.getByLabelText("Number of awesome bowlers")).toHaveValue(1);
     expect(screen.getByLabelText("Number of lanes")).toHaveValue(1);
     expect(screen.getByLabelText("Shoe size / person 1")).toHaveValue("29");
 
-    waitFor(() => {
+    await waitFor(() => {
       fireEvent.click(submitBtn);
     })
 
       const sessionData = JSON.parse(sessionStorage.getItem("confirmation"));
       console.log("DATA", sessionData);
 
-    //screen.debug();
+      const expectedData = {
+        id: "12345-SUCHCODES",
+        price: "220",
+        active: true,
+        when: "2024-12-09T14:00",
+        lanes: "1",
+        people: "1",
+        shoes: ["29"],
+      };
 
+      expect(sessionData).not.toBeNull();
+      expect(sessionData).toEqual(expectedData);
+      
   });
+
   test("Test error message when missing field", () => {
     render(
         <MemoryRouter>
@@ -67,7 +79,8 @@ describe("App tests", () => {
       fireEvent.click(submitBtn);
       expect(screen.getByText("Alla fälten måste vara ifyllda")).toBeDefined();
 
-  })
+  });
+
   test("Test error message when Shoes does not match players", () => {
     render(
         <MemoryRouter>
@@ -102,7 +115,8 @@ describe("App tests", () => {
       expect(screen.getByText("Antalet skor måste stämma överens med antal spelare"))
         
 
-  })
+  });
+
   test("Test error message when there is to many people on the lane", () => {
     render(
         <MemoryRouter>
@@ -150,10 +164,11 @@ describe("App tests", () => {
   
       fireEvent.click(submitBtn);
       expect(screen.getByText("Det får max vara 4 spelare per bana"))
-      screen.debug();
+      //screen.debug();
         
 
-  })
+  });
+
   test("Test error message when all shoes are not filled", () => {
     render(
         <MemoryRouter>
@@ -188,7 +203,8 @@ describe("App tests", () => {
       //screen.debug();
         
 
-  })
+  });
+
   describe("Test add and remove shoe", () => {
       test("Test add shoe ", async () => {
         render(
@@ -203,6 +219,7 @@ describe("App tests", () => {
         const removeShoeBtn = screen.getAllByText("-")
         expect(removeShoeBtn).toHaveLength(2)
       });
+      
       test("Test remove shoe ", async () => {
         render(
           <MemoryRouter>

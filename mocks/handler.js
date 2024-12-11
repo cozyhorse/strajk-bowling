@@ -18,7 +18,7 @@ export const handlers = [
     sessionStorage.setItem("confirmation", JSON.stringify(confirmation));
     const sessionData = JSON.parse(sessionStorage.getItem("confirmation"));
     console.log("SESSIONDATA", sessionData);
-    return HttpResponse(confirmation);
+    return HttpResponse.json(confirmation);
 
   })
 ];

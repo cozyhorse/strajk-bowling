@@ -1,5 +1,5 @@
-import { beforeAll, afterEach, afterAll, describe, expect, test } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
+import { render, screen, } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Confirmation from "../src/views/Confirmation";
 
