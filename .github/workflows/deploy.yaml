@@ -63,6 +63,9 @@ jobs:
       - name: Start build
         run: npm run build
 
+      - name: Verify build output
+        run: test -d ./dist || (echo "Build output not found!" && exit 1)
+
       - name: Setup pages
         uses: actions/configure-pages@v3
 
